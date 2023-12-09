@@ -1,7 +1,7 @@
 import { GithubLogo } from "@phosphor-icons/react"
 import Logo from "../assets/img/logo.svg"
 import TextBoxLogin from "../components/textBox/textBoxLogin"
-import Button from "../components/buttons/button"
+import { Button } from "../components/buttons/button"
 import ImageBackground from "../components/imageBackground"
 
 export default function Login(){
