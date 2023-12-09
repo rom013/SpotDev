@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body{
+html,
+body {
     @apply bg-zinc-900
+}
+
+.line-title {
+    @apply after:block after:w-1/2 after:h-[1px] after:bg-sky-400
+}
+
+.card-text {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
