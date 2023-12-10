@@ -1,12 +1,22 @@
 import { GithubLogo } from "@phosphor-icons/react"
 import Logo from "../assets/img/logo.svg"
 import TextBoxLogin from "../components/textBox/textBoxLogin"
-import { Button } from "../components/buttons/button"
+import { ButtonAccess } from "../components/buttons/button"
 import ImageBackground from "../components/imageBackground"
+import { useState } from "react"
 
-export default function Login(){
-    return(
-        <main
+
+
+export default function Login() {
+
+	const [textBoxValue, setTextBoxValue] = useState('');
+	const [messageError, setMessageError] = useState({
+		active: false,
+		message: null
+	})
+
+	return (
+		<main
 			className="min-h-screen bg-zinc-900 flex items-center justify-center"
 		>
 			<section
@@ -39,15 +49,20 @@ export default function Login(){
 								size={18}
 							/>
 						}
+						value={textBoxValue}
+						messageError={messageError}
+						onChange={setTextBoxValue}
 					/>
-					<Button
+					<ButtonAccess
 						type="submit"
 						nameButton={"Entrar"}
+						data={textBoxValue}
+						message={setMessageError}
 					/>
 				</form>
 			</section>
-					
-			<ImageBackground/>
+
+			<ImageBackground />
 		</main>
-    )
+	)
 }

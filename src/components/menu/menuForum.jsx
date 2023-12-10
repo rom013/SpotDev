@@ -17,7 +17,7 @@ export default function MenuForum() {
             </div>
 
             <ButtonProfile
-                username={"rom013"}
+                username={localStorage.getItem("username")}
             />
         </article>
     )

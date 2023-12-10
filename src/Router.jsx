@@ -24,7 +24,7 @@ export default function Controller() {
 }
 
 function PrivateRoute(){
-    let auth = {token: true}
+    let auth = {token: localStorage.getItem("username")}
     return(
         auth.token ? <Outlet/> : <Navigate to={"/login"} />
     )
