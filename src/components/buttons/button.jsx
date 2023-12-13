@@ -6,11 +6,12 @@
 * }} props Propriedades para o componente
 */
 
-import { Plus, SignOut, X } from "@phosphor-icons/react"
+import { CaretLeft, Plus, SignOut, X } from "@phosphor-icons/react"
 import { createClient } from "@supabase/supabase-js";
 import axios from "axios"
 import { memo, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 
 
@@ -157,6 +158,20 @@ function ButtonProfile({ username }) {
             }
 
         </div>
+    )
+}
+
+export function Back({ className }){
+    const navigate = useNavigate()
+    
+    return(
+        <button
+            className={twMerge(`text-zinc-600 flex gap-3 items-center transition-all duration-300`, className)}
+            onClick={()=>navigate(-1)}
+            title="Voltar"
+        >
+            <CaretLeft size={24} weight="bold" />
+        </button>
     )
 }
 

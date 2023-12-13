@@ -5,6 +5,7 @@ import { createClient } from "@supabase/supabase-js";
 import ButtonNewPost from "../components/buttons/buttonNewPost";
 import CardPost from "../components/cardBox/cardPost";
 import MenuMembers from "../components/menu/menuMembers";
+import { Back } from "../components/buttons/button";
 
 export default function ForumPage() {
     const { id } = useParams()
@@ -41,8 +42,11 @@ export default function ForumPage() {
             <MenuForum />
 
             <main
-                className="flex-1 flex flex-col items-center pt-20 gap-20"
+                className="flex-1 flex flex-col items-center pt-20 gap-20 relative"
             >
+                <Back
+                    className={"absolute top-10 left-20"}
+                />
                 <section
                     className="flex w-full items-center justify-between px-20"
                 >
