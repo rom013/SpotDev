@@ -6,6 +6,8 @@ import ButtonNewPost from "../components/buttons/buttonNewPost";
 import CardPost from "../components/cardBox/cardPost";
 import MenuMembers from "../components/menu/menuMembers";
 import { Back } from "../components/buttons/button";
+import LogoGray from "../assets/img/logo-gray.svg"
+
 
 export default function ForumPage() {
     const { id } = useParams()
@@ -14,24 +16,46 @@ export default function ForumPage() {
     const [forum, setForum] = useState({
         name: "",
         image: "",
-        active: null
+        active: null,
+        posts: []
     })
 
     useEffect(() => {
         const fetchForums = async () => {
-            supabase
+            const { data: forums } = await supabase
                 .from("forum")
-                .select("name_forum, img_forum, active")
+                .select("name_forum, img_forum, active, id")
                 .eq("id", id)
-                .then(({ data: forum }) => {
-                    setForum({
-                        active: forum[0].active,
-                        image: forum[0].img_forum,
-                        name: forum[0].name_forum
-                    })
-                })
-            }
-            fetchForums()
+
+            const forumList = await Promise.all(
+                forums.map(async (forum) => {
+                    console.log(forum);
+                    const { data: posts, error: tagError } = await supabase
+                        .from('posts')
+                        .select('title, description')
+                        .eq('id_forum', forum.id);
+
+                    if (tagError) {
+                        console.error(tagError);
+                        return;
+                    }
+
+                    return {
+                        ...forum,
+                        posts: posts
+                    };
+                }));
+
+
+            setForum({
+                active: forumList[0].active,
+                image: forumList[0].img_forum,
+                name: forumList[0].name_forum,
+                posts: forumList[0].posts
+            })
+        }
+
+        fetchForums()
     }, [id])
 
 
@@ -79,17 +103,31 @@ export default function ForumPage() {
                 <section
                     className="container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
                 >
-
-                    <CardPost
-                        title={"ReferenceError: can't access lexical declaration 'prevImage' before initialization"}
-                        description={"Pessoal, sabem me explicar o que está ocorrendo aqui? Na primeira imagem está o meu código, na segunda o código do professor-youtuber. O meu tá dando erro pq estou chamando a variável ( prevImage ) antes de declará-la, mas o do professor não dá este erro pq ele está chamando a variável de dentro de uma function  Eu sei que não se deve chamar let ou const antes de declará-la. Mas pq a chamada que está ocorrendo de dentro de uma function não está dando este erro?"}
-                    />
-                    
-
+                    {
+                        forum.posts.length === 0
+                        ? <p className="w-full text-center text-zinc-600 text-lg">Não há nenhuma interação nessa comunidade</p>
+                        : forum.posts.map((post, i) => {
+                            return(
+                                <CardPost
+                                    description={post.description}
+                                    title={post.title}
+                                    key={i}
+                                />
+                            )
+                        })
+                    }
                 </section>
+
+                <img
+                    src={LogoGray}
+                    alt="logo"
+                    draggable={false}
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                />
+
             </main>
 
-            <MenuMembers/>
+            <MenuMembers />
         </main>
     )
 }
