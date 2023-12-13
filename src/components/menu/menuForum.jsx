@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react"
-import LogoForum from "../../assets/img/logoForum.png"
 import { ButtonAddNewForum, ButtonNavigateForum, ButtonProfile } from "../buttons/button"
 import { createClient } from "@supabase/supabase-js"
 
 export default function MenuForum() {
-
     const supabase = createClient(import.meta.env.VITE_URL_SUPABASE, import.meta.env.VITE_API_KEY_SUPABASE)
-
     const [myForum, setForum] = useState([])
 
     useEffect(() => {
@@ -17,18 +14,11 @@ export default function MenuForum() {
             .then(({data}) => {
                 setForum(data)
             })
-
-
-        // if (error) {
-        //     console.error(error);
-        //     return;
-        // }
-
     }, [])
 
     return (
         <article
-            className="py-10 px-4 bg-zinc-800 h-screen flex flex-col justify-between"
+            className="py-10 px-4 bg-zinc-800 h-screen flex flex-col justify-between sticky top-0"
         >
             <div
                 className="flex flex-col gap-3"
@@ -37,10 +27,10 @@ export default function MenuForum() {
                     myForum.map(forum => {
                         return <ButtonNavigateForum
                             logoForum={forum.img_forum}
+                            id={forum.id}
                         />
                     })
                 }
-
 
                 <ButtonAddNewForum />
             </div>

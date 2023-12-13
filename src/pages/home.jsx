@@ -2,7 +2,6 @@ import MenuForum from "../components/menu/menuForum";
 import Logo from "../assets/img/logo-secundary.svg"
 import CardForum from "../components/cardBox/cardForum";
 import { useEffect, useState } from "react";
-import axios from "axios";
 
 import { createClient } from '@supabase/supabase-js'
 
@@ -15,7 +14,7 @@ export default function Home() {
         const fetchForums = async () => {
             const { data: forums, error } = await supabase
                 .from('forum')
-                .select('id, name_forum, img_forum');
+                .select('id, name_forum, img_forum, active');
 
             if (error) {
                 console.error(error);
@@ -87,6 +86,7 @@ export default function Home() {
                                         key={i}
                                         tags={f.tags}
                                         id={f.id}
+                                        active={f.active}
                                     />
                                 )
                             })

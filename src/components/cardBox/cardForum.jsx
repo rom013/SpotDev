@@ -1,13 +1,13 @@
 import { useState } from "react"
 import { createPortal } from "react-dom"
 
-export default function CardForum({ logo, nameForum, users = 0, tags = [] }) {
-    const [ showModal, setShowModal ] = useState(false)
-    
+export default function CardForum({ logo, nameForum, users = 0, tags = [], active }) {
+    const [showModal, setShowModal] = useState(false)
+
     return (
         <button
             className="bg-zinc-800 rounded-lg p-2 w-64 flex gap-3 items-center hover:bg-zinc-700 transition-all"
-            onClick={()=>setShowModal(!showModal)}
+            onClick={() => setShowModal(!showModal)}
         >
             <div
                 className="min-w-[64px] h-16 rounded overflow-hidden"
@@ -16,6 +16,7 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [] }) {
                     src={logo}
                     alt={nameForum}
                     className="w-full h-full object-cover"
+                    draggable={false}
                 />
             </div>
 
@@ -28,13 +29,13 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [] }) {
                     <strong
                         className="text-white font-bold text-lg font-baiJamjuree text-start"
                     >
-                        { nameForum }
+                        {nameForum}
                     </strong>
 
                     <span
                         className="font-lato text-sm text-white"
                     >
-                        { users } users
+                        {users} users
                     </span>
                 </div>
 
@@ -43,7 +44,7 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [] }) {
                 >
                     {
                         tags.map(tag => {
-                            return(
+                            return (
                                 <span className="w-max">#{tag}</span>
                             )
                         })
@@ -56,6 +57,7 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [] }) {
                         img={logo}
                         name={nameForum}
                         tags={tags}
+                        active={active}
                     />,
                     document.body
                 )
@@ -64,8 +66,8 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [] }) {
     )
 }
 
-function ModalAddNewMember({ img, name, tags, controllModal }){
-    return(
+function ModalAddNewMember({ img, name, tags, controllModal, active }) {
+    return (
         <main
             className="absolute inset-0 bg-sky-900/40 backdrop-blur-sm flex justify-center items-center"
         >
@@ -78,10 +80,11 @@ function ModalAddNewMember({ img, name, tags, controllModal }){
                     <div
                         className="min-w-[8rem] h-32 overflow-hidden rounded-lg"
                     >
-                        <img 
-                            src={img} 
-                            alt={name} 
+                        <img
+                            src={img}
+                            alt={name}
                             className="object-cover h-full w-full"
+                            draggable={false}
                         />
                     </div>
 
@@ -97,7 +100,7 @@ function ModalAddNewMember({ img, name, tags, controllModal }){
                         >
                             {
                                 tags.map(tag => {
-                                    return(
+                                    return (
                                         <span className="italic">#{tag}</span>
                                     )
                                 })
@@ -106,10 +109,13 @@ function ModalAddNewMember({ img, name, tags, controllModal }){
 
                         <div className="flex mt-6">
                             <button
-                                onClick={()=>console.log("ooo")}
-                                className="rounded-lg hover:bg-sky-300 bg-sky-400 text-black text-lg font-bold font-baiJamjuree py-2 px-6 w-full text-center"
+                                disabled={active}
+                                onClick={() => console.log("ooo")}
+                                className="rounded-lg disabled:opacity-85 disabled:hover:bg-zinc-700 disabled:bg-zinc-700 hover:bg-sky-300 bg-sky-400 text-black text-lg font-bold font-baiJamjuree py-2 px-6 w-full text-center"
                             >
-                                Fazer parte
+                                {
+                                    active ? "Já faz parte" : "Fazer parte"
+                                }
                             </button>
                         </div>
                     </div>

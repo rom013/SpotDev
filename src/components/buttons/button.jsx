@@ -43,16 +43,20 @@ export function ButtonAccess({ type, nameButton, disabled = false, data, message
     )
 }
 
-export function ButtonNavigateForum({ logoForum }) {
+export function ButtonNavigateForum({ logoForum, id }) {
+    const navigate = useNavigate()
+
     return (
         <button
             type="button"
             className="h-10 w-10 rounded-full overflow-hidden"
+            onClick={()=>navigate(`/forum/${id}`)}
         >
             <img
                 src={logoForum}
                 alt=""
                 className="w-full h-full object-cover"
+                draggable={false}
             />
         </button>
     )
@@ -101,6 +105,7 @@ function ButtonProfile({ username }) {
                 <img
                     src={`https://github.com/${username}.png`}
                     alt={username}
+                    draggable={false}
                 />
             </button>
 
