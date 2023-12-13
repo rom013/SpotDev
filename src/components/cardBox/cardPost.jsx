@@ -1,9 +1,10 @@
 import { memo } from "react"
 
-function CardPost({ title, description }) {
+function CardPost({ title, description, controllScreen }) {
     return (
         <button
             className="rounded-lg bg-zinc-800 p-6 w-full flex flex-col gap-2"
+            onClick={()=>controllScreen("chat")}
         >
             <strong
                 className="text-white text-xl font-semibold font-lato"
