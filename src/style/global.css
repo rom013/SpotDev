@@ -16,3 +16,19 @@ body {
     white-space: nowrap;
     overflow: hidden;
 }
+
+
+/* width */
+.container::-webkit-scrollbar {
+    @apply w-1
+}
+
+/* Track */
+.container::-webkit-scrollbar-track {
+    @apply bg-inherit;
+}
+
+/* Handle */
+.container::-webkit-scrollbar-thumb {
+    @apply bg-zinc-600
+}

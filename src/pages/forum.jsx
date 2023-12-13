@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import ButtonNewPost from "../components/buttons/buttonNewPost";
 import CardPost from "../components/cardBox/cardPost";
+import MenuMembers from "../components/menu/menuMembers";
 
 export default function ForumPage() {
     const { id } = useParams()
@@ -40,10 +41,10 @@ export default function ForumPage() {
             <MenuForum />
 
             <main
-                className="flex-1 flex flex-col items-center pt-20 px-20 gap-20"
+                className="flex-1 flex flex-col items-center pt-20 gap-20"
             >
                 <section
-                    className="flex w-full items-center justify-between"
+                    className="flex w-full items-center justify-between px-20"
                 >
                     <div
                         className="flex gap-8 items-center"
@@ -72,16 +73,19 @@ export default function ForumPage() {
                 </section>
 
                 <section
-                    className="w-full flex flex-col gap-8 pb-20"
+                    className="container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
                 >
 
                     <CardPost
                         title={"ReferenceError: can't access lexical declaration 'prevImage' before initialization"}
                         description={"Pessoal, sabem me explicar o que está ocorrendo aqui? Na primeira imagem está o meu código, na segunda o código do professor-youtuber. O meu tá dando erro pq estou chamando a variável ( prevImage ) antes de declará-la, mas o do professor não dá este erro pq ele está chamando a variável de dentro de uma function  Eu sei que não se deve chamar let ou const antes de declará-la. Mas pq a chamada que está ocorrendo de dentro de uma function não está dando este erro?"}
                     />
+                    
 
                 </section>
             </main>
+
+            <MenuMembers/>
         </main>
     )
 }

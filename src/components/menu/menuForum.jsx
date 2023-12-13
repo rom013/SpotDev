@@ -18,7 +18,7 @@ export default function MenuForum() {
 
     return (
         <article
-            className="py-10 px-4 bg-zinc-800 h-screen flex flex-col justify-between sticky top-0"
+            className="py-10 px-4 bg-zinc-800 h-screen flex flex-col justify-between"
         >
             <div
                 className="flex flex-col gap-3"
