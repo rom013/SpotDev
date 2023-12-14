@@ -10,7 +10,7 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [], activ
             onClick={() => setShowModal(!showModal)}
         >
             <div
-                className="min-w-[64px] h-16 rounded overflow-hidden"
+                className="min-w-[64px] w-16 h-16 rounded overflow-hidden"
             >
                 <img
                     src={logo}
@@ -27,7 +27,7 @@ export default function CardForum({ logo, nameForum, users = 0, tags = [], activ
                     className="flex flex-col items-start"
                 >
                     <strong
-                        className="text-white font-bold text-lg font-baiJamjuree text-start"
+                        className="text-white font-bold text-lg font-baiJamjuree text-start capitalize"
                     >
                         {nameForum}
                     </strong>

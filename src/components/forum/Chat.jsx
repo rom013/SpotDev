@@ -7,6 +7,7 @@ export default function Chat({ id }) {
 
     const supabase = createClient(import.meta.env.VITE_URL_SUPABASE, import.meta.env.VITE_API_KEY_SUPABASE)
 
+    const [ loading, setLoading ] = useState(false)
     const [infoChat, setInfoChat] = useState([])
 
     useEffect(() => {
@@ -17,14 +18,14 @@ export default function Chat({ id }) {
             .then(({ data }) => {
                 setInfoChat(data)
             })
-    }, [])
+    }, [loading])
 
     return (
         <section
             className="z-30 w-full px-20 flex-1 flex flex-col justify-between pb-10"
         >
             <div 
-                className="container flex-1 flex flex-col gap-8 max-h-[calc(100vh-150px)] pb-20 overflow-y-hidden hover:overflow-y-scroll "
+                className="container flex-1 flex flex-col gap-8 max-h-[calc(100vh-180px)] pb-20 overflow-y-hidden hover:overflow-y-scroll "
             >
                 {
                     infoChat.length === 0
@@ -42,7 +43,11 @@ export default function Chat({ id }) {
                 }
 
             </div>
-            <TextBoxChat/>
+            <TextBoxChat
+                idPost={id}
+                controlLoading={setLoading}
+                loading={loading}
+            />
         </section>
     )
 }

@@ -113,7 +113,7 @@ function ButtonProfile({ username }) {
             {
                 showInfoUser && (
                     <div
-                        className="absolute bg-zinc-800 p-3 rounded flex flex-col gap-6 left-[200%] bottom-0"
+                        className="z-[800] absolute bg-zinc-800 p-3 rounded flex flex-col gap-6 left-[200%] bottom-0"
                     >
                         <button
                             className="absolute right-3 top-3 text-neutral-400"

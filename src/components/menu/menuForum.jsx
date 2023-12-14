@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
+import { memo, useEffect, useState } from "react"
 import { ButtonAddNewForum, ButtonNavigateForum, ButtonProfile } from "../buttons/button"
 import { createClient } from "@supabase/supabase-js"
 
-export default function MenuForum() {
+function MenuForum() {
     const supabase = createClient(import.meta.env.VITE_URL_SUPABASE, import.meta.env.VITE_API_KEY_SUPABASE)
     const [myForum, setForum] = useState([])
 
@@ -41,3 +41,5 @@ export default function MenuForum() {
         </article>
     )
 }
+
+export default memo(MenuForum)

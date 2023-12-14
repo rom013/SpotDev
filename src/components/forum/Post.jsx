@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import ButtonNewPost from "../buttons/buttonNewPost"
 import CardPost from "../cardBox/cardPost"
 import { createClient } from "@supabase/supabase-js"
-import { useParams } from "react-router-dom"
 
 export default function Posts({ controllScreen, id }) {
 
