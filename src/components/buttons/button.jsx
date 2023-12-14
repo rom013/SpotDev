@@ -161,14 +161,16 @@ function ButtonProfile({ username }) {
     )
 }
 
-export function Back({ className }){
+export function Back({ className, navComponent, screen }){
     const navigate = useNavigate()
     
     return(
         <button
             className={twMerge(`text-zinc-600 flex gap-3 items-center transition-all duration-300`, className)}
             onClick={()=>{
-                navigate(-1)
+                screen.page == "chat"
+                ? navComponent({page: "post"})
+                : navigate("/")
             }}
             title="Voltar"
         >

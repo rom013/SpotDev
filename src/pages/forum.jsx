@@ -39,6 +39,8 @@ export default function ForumPage() {
             >
                 <Back
                     className={"absolute top-10 left-20"}
+                    navComponent={setScreen}
+                    screen={screen}
                 />
 
                 <Screen />
