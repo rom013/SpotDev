@@ -9,15 +9,20 @@ import Chat from "../components/forum/Chat";
 
 export default function ForumPage() {
 
-    const [screen, setScreen] = useState("")
+    const [screen, setScreen] = useState({
+        page: "post",
+        id: null
+    })
 
 
     function Screen() {
-        switch (screen) {
+        switch (screen.page) {
             case "post":
                 return <Posts controllScreen={setScreen} />
             case "chat":
-                return <Chat id={1} />
+                return <Chat 
+                    id={screen.id} 
+                />
             default:
                 return <Posts controllScreen={setScreen} />
         }
@@ -43,7 +48,7 @@ export default function ForumPage() {
                     src={LogoGray}
                     alt="logo"
                     draggable={false}
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none"
                 />
 
             </main>

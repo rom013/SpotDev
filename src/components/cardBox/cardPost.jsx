@@ -1,10 +1,13 @@
 import { memo } from "react"
 
-function CardPost({ title, description, controllScreen }) {
+function CardPost({ title, description, controllScreen, id }) {
     return (
         <button
             className="rounded-lg bg-zinc-800 p-6 w-full flex flex-col gap-2"
-            onClick={()=>controllScreen("chat")}
+            onClick={()=>controllScreen({
+                page: "chat",
+                id: id
+            })}
         >
             <strong
                 className="text-white text-xl font-semibold font-lato"

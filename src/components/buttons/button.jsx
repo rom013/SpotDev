@@ -167,7 +167,9 @@ export function Back({ className }){
     return(
         <button
             className={twMerge(`text-zinc-600 flex gap-3 items-center transition-all duration-300`, className)}
-            onClick={()=>navigate(-1)}
+            onClick={()=>{
+                navigate(-1)
+            }}
             title="Voltar"
         >
             <CaretLeft size={24} weight="bold" />

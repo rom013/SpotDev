@@ -28,7 +28,7 @@ export default function Posts({ controllScreen }) {
                     console.log(forum);
                     const { data: posts, error: tagError } = await supabase
                         .from('posts')
-                        .select('title, description')
+                        .select('title, description, id')
                         .eq('id_forum', forum.id);
 
                     if (tagError) {
@@ -86,7 +86,7 @@ export default function Posts({ controllScreen }) {
             </section>
 
             <section
-                className="container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
+                className="z-30 container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
             >
                 {
                     forum.posts.length === 0
@@ -98,6 +98,7 @@ export default function Posts({ controllScreen }) {
                                     title={post.title}
                                     key={i}
                                     controllScreen={controllScreen}
+                                    id={post.id}
                                 />
                             )
                         })
