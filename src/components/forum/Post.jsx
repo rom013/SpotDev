@@ -5,7 +5,7 @@ import { createClient } from "@supabase/supabase-js"
 
 export default function Posts({ controllScreen, id }) {
 
-    
+
     const supabase = createClient(import.meta.env.VITE_URL_SUPABASE, import.meta.env.VITE_API_KEY_SUPABASE)
 
     const [forum, setForum] = useState({
@@ -84,6 +84,11 @@ export default function Posts({ controllScreen, id }) {
                 <ButtonNewPost />
             </section>
 
+                <div 
+                    id="nwPost" 
+                    className="h-fit"
+                />
+            
             <section
                 className="z-30 container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
             >
