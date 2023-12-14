@@ -13,15 +13,19 @@ export default function Chat({ id }) {
             .from("chat")
             .select("id, tx_talk, nm_member, created_at")
             .eq("id_post", id)
-            .then(({ data }) => setInfoChat(data))
+            .then(({ data }) => {
+                setInfoChat(data)
+            })
     }, [])
 
     return (
         <section 
-            className="z-30 flex flex-col gap-8"
+            className="z-30 container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
         >
             {
-                infoChat.map((chat, i) => {
+                infoChat.length === 0
+                ? <p className="w-full text-center text-zinc-600 text-lg">Não há nenhuma interação nesse post</p>
+                : infoChat.map((chat, i) => {
                     return (
                         <CardChat
                             created_at={chat.created_at}
