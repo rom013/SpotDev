@@ -4,9 +4,9 @@ import CardPost from "../cardBox/cardPost"
 import { createClient } from "@supabase/supabase-js"
 import { useParams } from "react-router-dom"
 
-export default function Posts({ controllScreen }) {
+export default function Posts({ controllScreen, id }) {
 
-    const { id } = useParams()
+    
     const supabase = createClient(import.meta.env.VITE_URL_SUPABASE, import.meta.env.VITE_API_KEY_SUPABASE)
 
     const [forum, setForum] = useState({

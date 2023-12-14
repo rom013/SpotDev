@@ -3,8 +3,9 @@ import MenuMembers from "../components/menu/menuMembers";
 import { Back } from "../components/buttons/button";
 import LogoGray from "../assets/img/logo-gray.svg"
 import Posts from "../components/forum/Post";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chat from "../components/forum/Chat";
+import { useParams } from "react-router-dom";
 
 
 export default function ForumPage() {
@@ -13,18 +14,23 @@ export default function ForumPage() {
         page: "post",
         id: null
     })
-
-
+    const { id } = useParams()
+    useEffect(()=>{
+        setScreen({
+            page:"post",
+            id:null
+        })
+    },[id])
     function Screen() {
         switch (screen.page) {
             case "post":
-                return <Posts controllScreen={setScreen} />
+                return <Posts controllScreen={setScreen} id={id} />
             case "chat":
                 return <Chat 
                     id={screen.id} 
                 />
             default:
-                return <Posts controllScreen={setScreen} />
+                return <Posts controllScreen={setScreen} id={id} />
         }
     }
 
