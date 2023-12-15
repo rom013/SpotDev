@@ -1,30 +1,28 @@
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import Login from "./pages/login";
 import Home from "./pages/home";
 import ForumPage from "./pages/forum";
 
-export default function Controller() {
+export default function Router() {
     return (
-        <BrowserRouter>
-            <Routes>
+        <Routes>
+            <Route
+                element={<PrivateRoute />}
+            >
                 <Route
-                    element={<PrivateRoute />}
-                >
-                    <Route
-                        path="/"
-                        element={<Home />}
-                    />
-                    <Route
-                        path="/forum/:id"
-                        element={<ForumPage />}
-                    />
-                </Route>
-                <Route
-                    path="/login"
-                    element={<Login />}
+                    path="/"
+                    element={<Home />}
                 />
-            </Routes>
-        </BrowserRouter>
+                <Route
+                    path="/forum/:id"
+                    element={<ForumPage />}
+                />
+            </Route>
+            <Route
+                path="/login"
+                element={<Login />}
+            />
+        </Routes>
     )
 }
 
