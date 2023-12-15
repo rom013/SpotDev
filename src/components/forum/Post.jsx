@@ -56,41 +56,44 @@ export default function Posts({ controllScreen, id }) {
     return (
         <>
             <section
-                className="flex w-full items-center justify-between px-20"
+                className="flex flex-col w-full gap-6 px-20"
             >
                 <div
-                    className="flex gap-8 items-center"
+                    className="flex w-full items-center justify-between"
                 >
                     <div
-                        className="w-16 h-16 overflow-hidden rounded-full"
+                        className="flex gap-8 items-center"
                     >
-                        <img
-                            src={forum.image}
-                            alt=""
-                            className="h-full w-full object-cover"
-                            draggable={false}
-                        />
+                        <div
+                            className="w-16 h-16 overflow-hidden rounded-full"
+                        >
+                            <img
+                                src={forum.image}
+                                alt=""
+                                className="h-full w-full object-cover"
+                                draggable={false}
+                            />
+                        </div>
+                        <h2
+                            className="text-white text-[2rem] font-bold uppercase"
+                        >
+                            {
+                                forum.name
+                            }
+                        </h2>
+
                     </div>
-                    <h2
-                        className="text-white text-[2rem] font-bold uppercase"
-                    >
-                        {
-                            forum.name
-                        }
-                    </h2>
 
+                    <ButtonNewPost />
                 </div>
-
-                <ButtonNewPost />
-            </section>
-
                 <div 
                     id="nwPost" 
-                    className="h-fit"
                 />
+            </section>
+
             
             <section
-                className="z-30 container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-30vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
+                className="z-30 container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-31vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
             >
                 {
                     forum.posts.length === 0

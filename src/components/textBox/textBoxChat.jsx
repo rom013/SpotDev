@@ -1,25 +1,35 @@
 import { SmileyWink } from "@phosphor-icons/react";
 import { createClient } from "@supabase/supabase-js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function TextBoxChat({ idPost, loading, controlLoading }) {
 
     const supabase = createClient(import.meta.env.VITE_URL_SUPABASE, import.meta.env.VITE_API_KEY_SUPABASE)
 
     const [ valueInput, setValueInput ] = useState("")
+    const [ errorMessage, setErrorMessage ] = useState("")
 
     const handleNewTalk = () => {
-        controlLoading(true)
-        supabase
-            .from("chat")
-            .insert([
-                { tx_talk: valueInput, nm_member: localStorage.getItem("username"), id_post: idPost },
-            ])
-            .then(e => {
-                setValueInput("")
-                controlLoading(false)
-            })
+        valueInput.trim().length != 0 ? (
+            controlLoading(true),
+            supabase
+                .from("chat")
+                .insert([
+                    { tx_talk: valueInput, nm_member: localStorage.getItem("username"), id_post: idPost },
+                ])
+                .then(e => {
+                    setValueInput("")
+                    controlLoading(false)
+                })
+        ) 
+        : (
+            setErrorMessage("Campo vazio!")
+        )
     }
+
+    useEffect(()=>{
+        setErrorMessage("")
+    },[valueInput])
 
     return (
         <label
@@ -39,6 +49,18 @@ export default function TextBoxChat({ idPost, loading, controlLoading }) {
                 onChange={e => setValueInput(e.target.value)}
                 value={valueInput}
             />
+
+        	{
+                errorMessage && (
+                    <span
+                        className="absolute -bottom-6 left-0 text-red-600"
+                    >
+                        {
+                            errorMessage
+                        }
+                    </span>
+                )
+            }
         </label>
     )
 }

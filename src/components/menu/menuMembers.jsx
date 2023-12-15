@@ -3,7 +3,7 @@ import { memo } from "react"
 function MenuMembers(){
     return(
         <article
-            className="py-10 px-4 bg-zinc-800 h-screen flex flex-col min-w-[232px] gap-8"
+            className="py-10 px-4 bg-zinc-800 h-screen flex flex-col min-w-[232px] gap-8 sticky top-0"
         >
             <div
                 className="flex flex-col gap-5"

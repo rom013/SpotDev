@@ -33,7 +33,7 @@ function PrivateRoute() {
             ? (
                 <>
                     <p
-                        className="absolute right-2 bottom-2 text-zinc-700 z-[999] pointer-events-none"
+                        className="fixed right-2 bottom-2 text-zinc-700 z-[999] pointer-events-none"
                     >
                         by @rom013
                     </p>
@@ -43,7 +43,7 @@ function PrivateRoute() {
             : (
                 <>
                     <p
-                        className="absolute right-2 bottom-2 text-zinc-700 z-[999] pointer-events-none"
+                        className="fixed right-2 bottom-2 text-zinc-700 z-[999] pointer-events-none"
                     >
                         by @rom013
                     </p>
