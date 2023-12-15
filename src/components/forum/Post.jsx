@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import ButtonNewPost from "../buttons/buttonNewPost"
 import CardPost from "../cardBox/cardPost"
 import { createClient } from "@supabase/supabase-js"
+import { PlaceholderBox, PlaceholderHeaderPost } from "../loading/placeholder"
 
 export default function Posts({ controllScreen, id }) {
 
@@ -15,7 +16,11 @@ export default function Posts({ controllScreen, id }) {
         posts: []
     })
 
+    const [loading, setLoading] = useState(false)
+
     useEffect(() => {
+        setLoading(true)
+
         const fetchForums = async () => {
             const { data: forums } = await supabase
                 .from("forum")
@@ -48,6 +53,8 @@ export default function Posts({ controllScreen, id }) {
                 name: forumList[0].name_forum,
                 posts: forumList[0].posts
             })
+
+            setLoading(false)
         }
 
         fetchForums()
@@ -61,54 +68,79 @@ export default function Posts({ controllScreen, id }) {
                 <div
                     className="flex w-full items-center justify-between"
                 >
-                    <div
-                        className="flex gap-8 items-center"
-                    >
-                        <div
-                            className="w-16 h-16 overflow-hidden rounded-full"
-                        >
-                            <img
-                                src={forum.image}
-                                alt=""
-                                className="h-full w-full object-cover"
-                                draggable={false}
-                            />
-                        </div>
-                        <h2
-                            className="text-white text-[2rem] font-bold uppercase"
-                        >
-                            {
-                                forum.name
-                            }
-                        </h2>
+                    {
+                        !loading
+                            ? (
+                                <>
+                                    <div
+                                        className="flex gap-8 items-center"
+                                    >
+                                        <div
+                                            className="w-16 h-16 overflow-hidden rounded-full"
+                                        >
+                                            <img
+                                                src={forum.image}
+                                                alt=""
+                                                className="h-full w-full object-cover"
+                                                draggable={false}
+                                            />
+                                        </div>
+                                        <h2
+                                            className="text-white text-[2rem] font-bold uppercase"
+                                        >
+                                            {
+                                                forum.name
+                                            }
+                                        </h2>
+                                    </div>
 
-                    </div>
+                                    <ButtonNewPost />
+                                </>
+                            )
+                            : (
+                               <PlaceholderHeaderPost/>
+                            )
+                    }
 
-                    <ButtonNewPost />
+
                 </div>
-                <div 
-                    id="nwPost" 
+                <div
+                    id="nwPost"
                 />
             </section>
 
-            
+
             <section
                 className="z-30 container w-full flex flex-col gap-8 pb-20 h-[calc(100vh-31vh)] overflow-y-hidden hover:overflow-y-scroll px-20"
             >
                 {
-                    forum.posts.length === 0
-                        ? <p className="w-full text-center text-zinc-600 text-lg">Não há nenhuma interação nessa comunidade</p>
-                        : forum.posts.map((post, i) => {
-                            return (
-                                <CardPost
-                                    description={post.description}
-                                    title={post.title}
-                                    key={i}
-                                    controllScreen={controllScreen}
-                                    id={post.id}
-                                />
-                            )
-                        })
+                    !loading 
+                    ? (
+                        <>
+                            {
+                                forum.posts.length === 0
+                                    ? <p className="w-full text-center text-zinc-600 text-lg">Não há nenhuma interação nessa comunidade</p>
+                                    : forum.posts.map((post, i) => {
+                                        return (
+                                            <CardPost
+                                                description={post.description}
+                                                title={post.title}
+                                                key={i}
+                                                controllScreen={controllScreen}
+                                                id={post.id}
+                                            />
+                                        )
+                                    })
+                            }
+                        </>
+                    )
+                    : (
+                        <>
+                            <PlaceholderBox/>
+                            <PlaceholderBox/>
+                            <PlaceholderBox/>
+                        </>
+                    )
                 }
             </section>
         </>
